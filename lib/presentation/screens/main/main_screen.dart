@@ -1,9 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:private_store_admin/config/theme/cw_colors.dart';
-import 'package:private_store_admin/presentation/screens/main/widgets/main_add_app_btn.dart';
+import 'package:private_store_admin/presentation/screens/main/widgets/main_add_app_bottom_sheet.dart';
 import 'package:private_store_admin/presentation/screens/main/widgets/main_user_info.dart';
 import 'package:private_store_admin/presentation/widget/app_list_item.dart';
+
+typedef AppListItemCallback = void Function(AppListItem app);
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -82,12 +84,33 @@ class _MainScreenState extends State<MainScreen> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children:  [
                 //사용자 정보 위젯
-                MainUserInfo(userName: '최한나', teamName: '모바일앱개발팀'),
+                const MainUserInfo(userName: '최한나', teamName: '모바일앱개발팀'),
 
                 //앱 추가 버튼
-                MainAddAppBtn()
+                GestureDetector(
+      onTap: () {
+        showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            builder: (context) {
+              return MainAddAppBottomSheet(addNewAppCallback: (app) {
+                setState(() {
+                  _originAppList.add(app);
+                });
+              });
+            }
+          );
+      },
+      child: Container(
+        color: CwColors.color3,
+        padding: EdgeInsets.all(10),
+        child: Text(
+          'Add new app',
+        ),
+      ),
+    )
               ],
             ),
             Expanded(
