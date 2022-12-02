@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:private_store_admin/config/theme/cw_colors.dart';
 import 'package:private_store_admin/presentation/screens/main/widgets/main_add_app_bottom_sheet.dart';
@@ -84,33 +83,34 @@ class _MainScreenState extends State<MainScreen> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children:  [
+              children: [
                 //사용자 정보 위젯
                 const MainUserInfo(userName: '최한나', teamName: '모바일앱개발팀'),
 
                 //앱 추가 버튼
                 GestureDetector(
-      onTap: () {
-        showModalBottomSheet(
-            context: context,
-            isScrollControlled: true,
-            builder: (context) {
-              return MainAddAppBottomSheet(addNewAppCallback: (app) {
-                setState(() {
-                  _originAppList.add(app);
-                });
-              });
-            }
-          );
-      },
-      child: Container(
-        color: CwColors.color3,
-        padding: EdgeInsets.all(10),
-        child: Text(
-          'Add new app',
-        ),
-      ),
-    )
+                  onTap: () {
+                    showModalBottomSheet(
+                        backgroundColor: Colors.transparent,
+                        context: context,
+                        isScrollControlled: true,
+                        builder: (context) {
+                          return MainAddAppBottomSheet(
+                              addNewAppCallback: (app) {
+                            setState(() {
+                              _originAppList.add(app);
+                            });
+                          });
+                        });
+                  },
+                  child: Container(
+                    color: CwColors.color3,
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      'Add new app',
+                    ),
+                  ),
+                )
               ],
             ),
             Expanded(
@@ -132,7 +132,7 @@ class _MainScreenState extends State<MainScreen> {
                             child: TextField(
                               controller: _searchController,
                               decoration: InputDecoration(
-                                isDense: true, 
+                                isDense: true,
                                 contentPadding: const EdgeInsets.all(1),
                                 prefixIcon: const Icon(Icons.search),
                                 hintText: 'Search',

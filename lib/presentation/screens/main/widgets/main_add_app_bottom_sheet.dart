@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,13 +38,15 @@ class _MainAddAppBottomSheetState extends State<MainAddAppBottomSheet> {
   var _selectedOs;
   var _selectedPlatform;
 
+  var _selectedImage;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
+      margin: EdgeInsets.only(left: 200),
       padding: EdgeInsets.all(30),
       width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.9,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -114,15 +118,20 @@ class _MainAddAppBottomSheetState extends State<MainAddAppBottomSheet> {
                     height: 5,
                   ),
                   GestureDetector(
-                    onTap: (){
-                      pickFiles();
-                    },
-                    child: Container(
-                      width: 70,
-                      height: 70,
-                      color: CwColors.color2,
-                    ),
-                  )
+                      onTap: () {
+                        pickFiles();
+                      },
+                      child: _selectedImage == null
+                          ? Container(
+                              width: 70,
+                              height: 70,
+                              color: CwColors.color2,
+                            )
+                          : Image.memory(
+                              _selectedImage,
+                              width: 70,
+                              height: 70,
+                            ))
                 ],
               )
             ],
@@ -290,6 +299,8 @@ class _MainAddAppBottomSheetState extends State<MainAddAppBottomSheet> {
                   role: 'Developer',
                   owner: _selectedOwner);
               widget.addNewAppCallback(item);
+
+              Navigator.of(context).pop();
             },
             child: Container(
               color: CwColors.color3,
@@ -321,7 +332,9 @@ class _MainAddAppBottomSheetState extends State<MainAddAppBottomSheet> {
     }
     if (paths != null) {
       if (paths != null) {
-        print('bbori upload file : ' + paths.first.name.toString());
+        setState(() {
+          _selectedImage = paths!.first.bytes;
+        });
       }
     }
   }
