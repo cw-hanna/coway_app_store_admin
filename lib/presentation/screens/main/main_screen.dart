@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:private_store_admin/config/theme/cw_colors.dart';
+import 'package:private_store_admin/data/models/app_info_model.dart';
 import 'package:private_store_admin/presentation/screens/main/widgets/main_add_app_bottom_sheet.dart';
 import 'package:private_store_admin/presentation/screens/main/widgets/main_user_info.dart';
 import 'package:private_store_admin/presentation/widget/app_list_item.dart';
 
-typedef AppListItemCallback = void Function(AppListItem app);
+typedef AppListItemCallback = void Function(AppInfoModel app);
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -17,45 +18,25 @@ class _MainScreenState extends State<MainScreen> {
   final List<String> _dropdownOsList = ['All', 'Android', 'iOS'];
   final List<String> _dropdownTypeList = ['All', 'Production', 'Develop'];
 
-  final List<AppListItem> _originAppList = [
-    const AppListItem(
-        appName: 'digitalsales-aos-seller',
-        os: 'Android',
-        releaseType: 'Production',
-        role: 'Collaborator',
-        owner: 'Coway'),
-    const AppListItem(
-        appName: 'digitalsales-aos-seller',
-        os: 'Android',
-        releaseType: 'Production',
-        role: 'Collaborator',
-        owner: 'Coway'),
-    const AppListItem(
-        appName: 'IoCare',
-        os: 'iOS',
-        releaseType: 'Develop',
-        role: 'Developer',
-        owner: 'Coway'),
-    const AppListItem(
-        appName: 'ARCatalogue',
-        os: 'iOS',
-        releaseType: 'Develop',
-        role: 'Developer',
-        owner: 'Coway'),
-    const AppListItem(
-        appName: 'IoCare',
-        os: 'Android',
-        releaseType: 'Develop',
-        role: 'Developer',
-        owner: 'Coway'),
-    const AppListItem(
-        appName: 'Coway',
-        os: 'Android',
-        releaseType: 'Production',
-        role: 'Admin',
-        owner: 'Coway')
+  final List<AppInfoModel> _originAppList = [
+    AppInfoModel('digitalsales-aos-seller', 'Android', 'Production', '22/12/01',
+        '2.1.0', 'f', 'hanna', null),
+    AppInfoModel('digitalsales-aos-seller', 'iOS', 'Develop', '22/12/02',
+        '2.1.0', 'f', 'hanna', null),
+    AppInfoModel('Coway', 'Android', 'Production', '22/12/01', '2.1.0', 'f',
+        'hanna', null),
+    AppInfoModel(
+        'Coway', 'iOS', 'Develop', '22/12/01', '2.1.0', 'f', 'hanna', null),
+    AppInfoModel('ARCatalogue', 'Android', 'Dev', '22/12/01', '2.1.0', 'f',
+        'hanna', null),
+    AppInfoModel('ARCatalogue', 'iOS', 'Production', '22/12/01', '2.1.0', 'f',
+        'hanna', null),
+    AppInfoModel(
+        'IoCare', 'Android', 'Dev', '22/12/01', '2.1.0', 'f', 'hanna', null),
+    AppInfoModel('dIoCare', 'iOS', 'Production', '22/12/01', '2.1.0', 'f',
+        'hanna', null),
   ];
-  List<AppListItem> _appList = [];
+  List<AppInfoModel> _appList = [];
 
   var _selectedOs = 'All';
   var _selectedReleaseType = 'All';
@@ -194,13 +175,36 @@ class _MainScreenState extends State<MainScreen> {
 
                       //리스트 헤더
                       Column(
-                        children: const [
-                          AppListItem(
-                              appName: 'Name',
-                              os: 'Os',
-                              releaseType: 'Release Type',
-                              role: 'Role',
-                              owner: 'Owner'),
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                Flexible(
+                                  flex: 4,
+                                  fit: FlexFit.tight,
+                                  child: Text('Name'),
+                                ),
+                                Flexible(
+                                    flex: 1,
+                                    fit: FlexFit.tight,
+                                    child: Text('OS')),
+                                Flexible(
+                                    flex: 2,
+                                    fit: FlexFit.tight,
+                                    child: Text('Release Type')),
+                                Flexible(
+                                    flex: 2,
+                                    fit: FlexFit.tight,
+                                    child: Text('Version')),
+                                Flexible(
+                                    flex: 2,
+                                    fit: FlexFit.tight,
+                                    child: Text('UpdateDAte')),
+                              ],
+                            ),
+                          ),
                           Divider(
                             height: 1,
                           )
@@ -212,7 +216,7 @@ class _MainScreenState extends State<MainScreen> {
                           shrinkWrap: true,
                           itemCount: _appList.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return _appList[index];
+                            return AppListItem(appInfoModel:  _appList[index]);
                           })
                     ],
                   )),
@@ -224,9 +228,9 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   //앱이름 검색창, os필터, releaseType필터 기능
-  List<AppListItem> _filterApp(
+  List<AppInfoModel> _filterApp(
       String appNameQuery, String os, String releaseType) {
-    List<AppListItem> suggestions;
+    List<AppInfoModel> suggestions;
 
     if ('All' == os) {
       suggestions = _originAppList;

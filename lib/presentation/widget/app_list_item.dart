@@ -1,40 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:private_store_admin/data/models/app_info_model.dart';
+import 'package:private_store_admin/presentation/screens/detail/app_detail_screen.dart';
 
 class AppListItem extends StatelessWidget {
-  final String appName;
-  final String os;
-  final String releaseType;
-  final String role;
-  final String owner;
+  final AppInfoModel appInfoModel;
 
-  const AppListItem(
-      {Key? key,
-      required this.appName,
-      required this.os,
-      required this.releaseType,
-      required this.role,
-      required this.owner})
-      : super(key: key);
+  const AppListItem({Key? key, required this.appInfoModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Flexible(
-            flex: 4,
-            fit: FlexFit.tight,
-            child: Text(appName),
-          ),
-          Flexible(flex: 1, fit: FlexFit.tight, child: Text(os)),
-          Flexible(flex: 2, fit: FlexFit.tight, child: Text(releaseType)),
-          Flexible(flex: 2, fit: FlexFit.tight, child: Text(role)),
-          Flexible(flex: 2, fit: FlexFit.tight, child: Text(owner))
-        ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => AppDetailScreen(
+                      appInfoModel: appInfoModel,
+                    )));
+      },
+      child: Padding(
+        padding: EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(
+              flex: 4,
+              fit: FlexFit.tight,
+              child: Text(appInfoModel.appName),
+            ),
+            Flexible(flex: 1, fit: FlexFit.tight, child: Text(appInfoModel.os)),
+            Flexible(
+                flex: 2,
+                fit: FlexFit.tight,
+                child: Text(appInfoModel.releaseType)),
+            Flexible(
+                flex: 2, fit: FlexFit.tight, child: Text(appInfoModel.version)),
+            Flexible(
+                flex: 2,
+                fit: FlexFit.tight,
+                child: Text(appInfoModel.updateDate)),
+          ],
+        ),
       ),
     );
   }

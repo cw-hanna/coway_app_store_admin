@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:private_store_admin/config/theme/cw_colors.dart';
+import 'package:private_store_admin/data/models/app_info_model.dart';
 import 'package:private_store_admin/presentation/screens/main/main_screen.dart';
 import 'package:private_store_admin/presentation/widget/app_list_item.dart';
 
@@ -292,13 +293,17 @@ class _MainAddAppBottomSheetState extends State<MainAddAppBottomSheet> {
           //등록 버튼
           GestureDetector(
             onTap: () {
-              AppListItem item = AppListItem(
-                  appName: _appNameTextControlelr.text,
-                  os: _selectedOs,
-                  releaseType: _selectedType,
-                  role: 'Developer',
-                  owner: _selectedOwner);
-              widget.addNewAppCallback(item);
+              AppInfoModel appInfoModel = AppInfoModel(
+                  _appNameTextControlelr.text,
+                  _selectedOs,
+                  _selectedType,
+                  '22/12/03',
+                  '2.1.3',
+                  'aa',
+                  _selectedOwner,
+                  null);
+
+              widget.addNewAppCallback(appInfoModel);
 
               Navigator.of(context).pop();
             },
