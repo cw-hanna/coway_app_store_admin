@@ -327,7 +327,7 @@ class _MainAddAppBottomSheetState extends State<MainAddAppBottomSheet> {
         type: FileType.custom,
         allowMultiple: false,
         onFileLoading: (FilePickerStatus status) => print(status),
-        allowedExtensions: ['png', 'jpg', 'jpeg', 'heic'],
+        allowedExtensions: ['png', 'jpg', 'jpeg', 'heic', 'apk'],
       ))
           ?.files;
     } on PlatformException catch (e) {

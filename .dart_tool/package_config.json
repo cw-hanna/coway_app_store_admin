@@ -128,6 +128,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "cross_file",
+      "rootUri": "file:///Users/hanna/Desktop/flutterSDK/.pub-cache/hosted/pub.dartlang.org/cross_file-0.3.3+2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "crypto",
       "rootUri": "file:///Users/hanna/Desktop/flutterSDK/.pub-cache/hosted/pub.dartlang.org/crypto-3.0.2",
       "packageUri": "lib/",
@@ -144,6 +150,12 @@
       "rootUri": "file:///Users/hanna/Desktop/flutterSDK/.pub-cache/hosted/pub.dartlang.org/dart_style-2.2.4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "desktop_drop",
+      "rootUri": "file:///Users/hanna/Desktop/flutterSDK/.pub-cache/hosted/pub.dartlang.org/desktop_drop-0.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "fake_async",
@@ -554,7 +566,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-12-02T06:21:15.571179Z",
+  "generated": "2022-12-05T04:29:53.950362Z",
   "generator": "pub",
   "generatorVersion": "2.17.6"
 }

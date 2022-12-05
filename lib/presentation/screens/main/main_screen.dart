@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:private_store_admin/config/theme/cw_colors.dart';
+import 'package:private_store_admin/data/models/app_file_model.dart';
 import 'package:private_store_admin/data/models/app_info_model.dart';
 import 'package:private_store_admin/presentation/screens/main/widgets/main_add_app_bottom_sheet.dart';
 import 'package:private_store_admin/presentation/screens/main/widgets/main_user_info.dart';
 import 'package:private_store_admin/presentation/widget/app_list_item.dart';
 
 typedef AppListItemCallback = void Function(AppInfoModel app);
+typedef AppUploadCallback = void Function(AppFileModel file);
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
