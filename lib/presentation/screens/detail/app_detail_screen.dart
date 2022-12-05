@@ -6,6 +6,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:private_store_admin/config/theme/cw_colors.dart';
 import 'package:private_store_admin/data/models/app_info_model.dart';
 import 'package:private_store_admin/presentation/screens/detail/widgets/detail_app_upload_bottom_sheet.dart';
+import 'package:cross_file/cross_file.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class AppDetailScreen extends StatefulWidget {
   final AppInfoModel appInfoModel;
@@ -17,7 +19,10 @@ class AppDetailScreen extends StatefulWidget {
 }
 
 class _AppDetailScreenState extends State<AppDetailScreen> {
-  PlatformFile? _selctedFile;
+  XFile? _selectedFileDrag;
+  PlatformFile? _selctedFileFind;
+
+  bool _showQr = false;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +70,13 @@ class _AppDetailScreenState extends State<AppDetailScreen> {
             Row(
               children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    if (_selctedFileFind != null || _selectedFileDrag != null) {
+                      setState(() {
+                        _showQr = true;
+                      });
+                    }
+                  },
                   child: Container(
                     color: Colors.blueGrey,
                     padding: EdgeInsets.all(20),
@@ -83,9 +94,19 @@ class _AppDetailScreenState extends State<AppDetailScreen> {
                         isScrollControlled: true,
                         builder: (context) {
                           return DetailAppUploadBottomSheet(
-                              uploadCallback: ((file) {
-                                //업로드한 파일 정보로 화면 update
-                              }));
+                            dargUploadCallback: (file) {
+                              //업로드한 파일 정보로 화면 update
+                              setState(() {
+                                _selectedFileDrag = file;
+                              });
+                            },
+                            findUploadCallback: (file) {
+                              //업로드한 파일 정보로 화면 update
+                              setState(() {
+                                _selctedFileFind = file;
+                              });
+                            },
+                          );
                         });
                   },
                   child: Container(
@@ -96,18 +117,13 @@ class _AppDetailScreenState extends State<AppDetailScreen> {
                 )
               ],
             ),
-            _selctedFile != null
+            SizedBox(
+              height: 30,
+            ),
+            _showQr
                 ? Container(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Text('업로드한 파일 : ' + _selctedFile!.name),
-                      ],
-                    ),
-                  )
-                : SizedBox(),
+                    width: 300, height: 300, child: QrImage(data: 'qrqrqr'))
+                : Text('다운받을 수 있는 파일이 없습니다.')
           ],
         ),
       ),

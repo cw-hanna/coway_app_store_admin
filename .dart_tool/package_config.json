@@ -392,6 +392,18 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "qr",
+      "rootUri": "file:///Users/hanna/Desktop/flutterSDK/.pub-cache/hosted/pub.dartlang.org/qr-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "qr_flutter",
+      "rootUri": "file:///Users/hanna/Desktop/flutterSDK/.pub-cache/hosted/pub.dartlang.org/qr_flutter-4.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "shared_preferences",
       "rootUri": "file:///Users/hanna/Desktop/flutterSDK/.pub-cache/hosted/pub.dartlang.org/shared_preferences-2.0.15",
       "packageUri": "lib/",
@@ -566,7 +578,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-12-05T04:29:53.950362Z",
+  "generated": "2022-12-05T05:20:58.377056Z",
   "generator": "pub",
   "generatorVersion": "2.17.6"
 }

@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:private_store_admin/config/theme/cw_colors.dart';
 import 'package:private_store_admin/data/models/app_file_model.dart';
@@ -6,8 +7,12 @@ import 'package:private_store_admin/presentation/screens/main/widgets/main_add_a
 import 'package:private_store_admin/presentation/screens/main/widgets/main_user_info.dart';
 import 'package:private_store_admin/presentation/widget/app_list_item.dart';
 
+import 'package:cross_file/cross_file.dart';
+
+
 typedef AppListItemCallback = void Function(AppInfoModel app);
-typedef AppUploadCallback = void Function(AppFileModel file);
+typedef AppUploadDragCallback = void Function(XFile? file);
+typedef AppUploadFineCallback = void Function(PlatformFile? file);
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
